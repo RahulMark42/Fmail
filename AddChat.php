@@ -23,7 +23,6 @@
 			$loggedUserFull = $loggedUser."@Fmail.com";
 			$toUser = $_GET['Contact'];
 		    $query = "Insert into ChatLog (FromUser , ToUser , ChatBody , ChatTime) Values ('$loggedUserFull','$toUser','Please Be My Friend','$date');";
-			$query1 = "Insert into ChatLog (ToUser , FromUser , ChatBody , ChatTime) Values ('$toUser','$loggedUserFull','Please Be My Friend','$date');";
 			if($conn -> query($query) == TRUE){
 				echo "Succesfully Updated contact list";
 				echo "<br>";
