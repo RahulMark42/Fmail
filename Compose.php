@@ -7,6 +7,11 @@
 	$username = "root";
 	$password = NULL;
 	$databasename = "Mail";
+
+	date_default_timezone_set("Asia/Kolkata");
+	$dateTime = date('Y-m-d h:i:s ', time());
+
+
 	$conn = mysqli_connect($servername,$username,$password,$databasename);
 	if(!$conn){
 		die("Connection Failed");
@@ -17,8 +22,8 @@
 		$compose = $_POST['Compose'];
 		if(!empty($to)){
 			if($_POST["Send"]){
-				$query1 = "INSERT INTO ALLINBOXEMAIL VALUES ('$LoggedUser' , '$to' , '$subject' , '$compose')";
-				$query2 = "INSERT INTO ALLISENTEMAIL VALUES ('$to' , '$LoggedUser' , '$subject' , '$compose')";
+				$query1 = "INSERT INTO ALLINBOXEMAIL VALUES ('$LoggedUser' , '$to' , '$subject' , '$compose' , '$dateTime')";
+				$query2 = "INSERT INTO ALLISENTEMAIL VALUES ('$to' , '$LoggedUser' , '$subject' , '$compose' , '$dateTime')";
 			
 				if($conn -> query($query1) == TRUE){
 					$conn -> query($query2);
@@ -53,6 +58,14 @@
 	}
 	
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 <form action = "Compose.php" method = "POST" >
 <h1><u>FMail.com</u></h1>
 <h3><u><i>Welcome to FMail!</i></u></h3><hr>
@@ -68,4 +81,6 @@ Compose: <br><br>
 <br><br>
 <input type = "submit" value = "Send" name = "Send"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 <input type = "submit" value = "Save in drafts" name = "Draft"> 
-</form>
+</form>	
+</body>
+</html>
